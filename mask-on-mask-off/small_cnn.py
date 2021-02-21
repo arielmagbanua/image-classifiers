@@ -1,6 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.optimizers import RMSprop
+from tensorflow.keras.optimizers import Adam
 import os
 
 project_dir = os.path.dirname(__file__)
@@ -57,10 +57,9 @@ model = tf.keras.models.Sequential([
     tf.keras.layers.Dense(1, activation='sigmoid')
 ])
 
-
 model.compile(
     loss='binary_crossentropy',
-    optimizer=RMSprop(lr=0.001),
+    optimizer=Adam(),
     metrics=['accuracy']
 )
 
@@ -79,7 +78,7 @@ train_datagen = ImageDataGenerator(
 
 train_generator = train_datagen.flow_from_directory(
     dataset_path,  # This is the source directory for training images
-    target_size=(360, 360),  # All images will be resized to 150x150
+    target_size=(360, 360),  # All images will be resized to 360x360
     batch_size=128,
     class_mode='binary',
     subset='training'
@@ -88,7 +87,7 @@ train_generator = train_datagen.flow_from_directory(
 validation_generator = train_datagen.flow_from_directory(
     dataset_path,
     target_size=(360, 360),  # All images will be resized to 150x150
-    batch_size=128,
+    batch_size=32,
     class_mode='binary',
     subset='validation'
 )
