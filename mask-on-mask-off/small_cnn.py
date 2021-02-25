@@ -87,7 +87,7 @@ train_generator = train_datagen.flow_from_directory(
 
 validation_generator = train_datagen.flow_from_directory(
     dataset_path,
-    target_size=(360, 360),  # All images will be resized to 150x150
+    target_size=(360, 360),  # All images will be resized to 360x360
     batch_size=32,
     class_mode='binary',
     shuffle=True,
